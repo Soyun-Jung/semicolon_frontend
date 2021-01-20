@@ -13,6 +13,7 @@ const List = styled.ul`
     align-items: center;
     justify-content: center;
     padding-bottom : 20px;
+    padding-top : 50px;
 
 `;
 

@@ -14,7 +14,7 @@ const FEED_QUERY = gql`
       caption
       user {
         id
-        avatar
+        avatar 
         username
       }
       files {
@@ -55,6 +55,8 @@ export default () => {
                     user={post.user}
                     files={post.files}
                     likeCount={post.likeCount}
+                    caption={post.caption}
+                    avatar={post.user.avatar}
                     isLiked={post.isLiked}
                     comments={post.comments}
                     createdAt={post.createdAt}

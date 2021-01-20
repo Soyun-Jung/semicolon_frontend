@@ -3,7 +3,8 @@ import styled from "styled-components";
 import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
-import { HeartFull, HeartEmpty, Comment } from "../Icons";
+import { Link } from "react-router-dom";
+import { HeartFull, HeartEmpty, Comment as CommentIcon} from "../Icons";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -11,6 +12,9 @@ const Post = styled.div`
   max-width: 600px;
   user-select: none;
   margin-bottom: 25px;
+  a{
+    color:inherit;
+  }
 `;
 
 const Header = styled.header`
@@ -87,6 +91,29 @@ const Textarea = styled(TextareaAutosize)`
   &:focus {
     outline: none;
   }
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`;
+
+const Comments = styled.ul`
+  margin-top:10px;
+`;
+
+const Comment = styled.li`
+  margin-bottom:7px;
+  span{
+    margin-right:5px;
+  }
+`;
+
+// const Caption = styled.div`
+//   margin-top : 15px;
+//   margin-left : 10px;
+//   margin-bottom:7px;
+// `;
+
+
+const Caption = styled.div`
+  margin : 10px 0px
 `;
 
 export default ({
@@ -97,35 +124,65 @@ export default ({
   likeCount,
   createdAt,
   newComment,
+  caption,
   currentItem,
-  toggleLike
+  toggleLike,
+  onKeyUp,
+  comments,
+  selfComments
 }) => (
   <Post>
     <Header>
       <Avatar size="sm" url={avatar} />
       <UserColumn>
-        <FatText text={username} />
+        <Link to={`/${username}`}>
+          <FatText text={username} />
+          </Link>
         <Location>{location}</Location>
       </UserColumn>
     </Header>
     <Files>
       {files &&
+
         files.map((file, index) => (
           <File key={file.id} src={file.url} showing={index === currentItem} />
         ))}
     </Files>
+    {/* <Caption>{caption}</Caption>  */}
     <Meta>
       <Buttons>
         <Button onClick={toggleLike}>
           {isLiked ? <HeartFull /> : <HeartEmpty />}
         </Button>
         <Button>
-          <Comment />
+          -
+          <CommentIcon />
         </Button>
       </Buttons>
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+      <Caption><FatText text={username} />{caption}</Caption>
+      {comments && (
+        <Comments>
+          {comments.map(comment => (
+            <Comment key={comment.id}>
+              <FatText text={comment.user.username} />
+              {comment.text}
+            </Comment>
+          ))}
+          {selfComments.map(comment => (
+            <Comment key={comment.id}>
+              <FatText text={comment.user.username} />
+              {comment.text}
+            </Comment>
+          ))}
+        </Comments>
+      )}
       <Timestamp>{createdAt}</Timestamp>
-      <Textarea placeholder={"Add a comment..."} {...newComment} />
+      <Textarea
+        placeholder={"Add a comment..."}
+        value={newComment.value}
+        onChange={newComment.onChange}
+        onKeyPress={onKeyUp} />
     </Meta>
   </Post>
 );
