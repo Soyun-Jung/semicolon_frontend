@@ -39,6 +39,7 @@ export default () => {
       if (email.value !== "") {
         try {
           const { data: { requestSecret } } = await requestSecretMutation();
+          console.log(requestSecret);
           if (!requestSecret) {
             toast.error("Woops!, 등록된 정보가 없어요! 회원가입으로 안내해 드릴게요!");
             setTimeout(() => setAction("signUp"), 3000);

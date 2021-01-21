@@ -6,6 +6,7 @@ import Avatar from "../../Components/Avatar";
 import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
+import Button from "../../Components/Button";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -59,72 +60,73 @@ const Posts = styled.div`
   grid-auto-rows: 200px;
 `;
 
-export default ({ loading, data }) => {
-  if (loading === true) {
-    return (
-      <Wrapper>
-        <Loader />
-      </Wrapper>
-    );
-  } else if (!loading && data && data.seeUser) {
-    const {
-      seeUser: {
-        id,
-        avatar,
-        username,
-        fullName,
-        isFollowing,
-        isSelf,
-        bio,
-        followingCount,
-        followersCount,
-        postsCount,
-        posts
-      }
-    } = data;
-    return (
-      <Wrapper>
-        <Helmet>
-          <title>{username} | Prismagram</title>
-        </Helmet>
-        <Header>
-          <HeaderColumn>
-            <Avatar size="lg" url={avatar} />
-          </HeaderColumn>
-          <HeaderColumn>
-            <UsernameRow>
-              <Username>{username}</Username>{" "}
-              
-            </UsernameRow>
-            <Counts>
-              <Count>
-                <FatText text={String(postsCount)} /> posts
+export default ({ loading, data, logOut }) => {
+    if (loading === true) {
+        return (
+            <Wrapper>
+                <Loader />
+            </Wrapper>
+        );
+    } else if (!loading && data && data.seeUser) {
+        const {
+            seeUser: {
+                id,
+                avatar,
+                username,
+                fullName,
+                isFollowing,
+                isSelf,
+                bio,
+                followingCount,
+                //followersCount,
+                postsCount,
+                posts
+            }
+        } = data;
+        return (
+            <Wrapper>
+                <Helmet>
+                    <title>{username} | Prismagram</title>
+                </Helmet>
+                <Header>
+                    <HeaderColumn>
+                        <Avatar size="lg" url={avatar} />
+                    </HeaderColumn>
+                    <HeaderColumn>
+                        <UsernameRow>
+                            <Username>{username}</Username>{" "}
+
+                        </UsernameRow>
+                        <Counts>
+                            <Count>
+                                <FatText text={String(postsCount)} /> posts
               </Count>
-              <Count>
-                <FatText text={String(followersCount)} /> followers
+                            {/* <Count>
+                                <FatText text={String(followersCount)} /> followers
+              </Count> */}
+                            <Count>
+                                <FatText text={String(followingCount)} /> following
               </Count>
-              <Count>
-                <FatText text={String(followingCount)} /> following
-              </Count>
-            </Counts>
-            <FullName text={fullName} />
-            <Bio>{bio}</Bio>
-            {!isSelf && <FollowButton isFollowing={isFollowing} id={id} />}
-          </HeaderColumn>
-        </Header>
-        <Posts>
-          {posts &&
-            posts.map(post => (
-              <SquarePost
-                key={post.id}
-                likeCount={post.likeCount}
-                commentCount={post.commentCount}
-                file={post.files[0]}
-              />
-            ))}
-        </Posts>
-      </Wrapper>
-    );
-  }
-  return null;
+
+                        </Counts>
+                        <FullName text={fullName} />
+                        <Bio>{bio}</Bio>
+                {isSelf ? <Button onClick={logOut} text="Log Out"/> : <FollowButton isFollowing={isFollowing} id={id} />}
+                    </HeaderColumn>
+                </Header>
+                <Posts>
+                    {posts &&
+                        posts.map(post => (
+                            <SquarePost
+                                key={post.id}
+                                likeCount={post.likeCount}
+                                commentCount={post.commentCount}
+                                file={post.files[0]}
+                            />
+                        ))}
+                </Posts>
+            </Wrapper>
+        );
+    }
+    return null;
 };

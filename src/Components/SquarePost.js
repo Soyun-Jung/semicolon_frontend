@@ -66,7 +66,6 @@ SquarePost.propTypes = {
     likeCount: PropTypes.number.isRequired,
     commentCount: PropTypes.number.isRequired,
     file: PropTypes.shape({
-            id: PropTypes.string.isRequired,
             url: PropTypes.string.isRequired
         }).isRequired
 };
