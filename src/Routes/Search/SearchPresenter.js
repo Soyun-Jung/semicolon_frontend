@@ -72,6 +72,7 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
             ))
           )}
         </PostSection>
+        {/* <div id="content"></div> */}
       </Wrapper>
     );
   }
