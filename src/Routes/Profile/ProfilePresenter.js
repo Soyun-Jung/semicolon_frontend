@@ -78,7 +78,7 @@ export default ({ loading, data, logOut }) => {
                 isSelf,
                 bio,
                 followingCount,
-                //followersCount,
+                followersCount,
                 postsCount,
                 posts
             }
@@ -101,9 +101,9 @@ export default ({ loading, data, logOut }) => {
                             <Count>
                                 <FatText text={String(postsCount)} /> posts
               </Count>
-                            {/* <Count>
+                            <Count>
                                 <FatText text={String(followersCount)} /> followers
-              </Count> */}
+              </Count>
                             <Count>
                                 <FatText text={String(followingCount)} /> following
               </Count>
