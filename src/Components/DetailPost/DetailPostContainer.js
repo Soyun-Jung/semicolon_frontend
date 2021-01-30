@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
-import PostPresenter from "./PostPresenter";
+import PostPresenter from "./DetailPostPresenter";
 import { useMutation } from "react-apollo-hooks";
-import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
+import { TOGGLE_LIKE, ADD_COMMENT } from "./DetailPostQueries";
 import { toast } from "react-toastify";
 
 const PostContainer = ({
@@ -69,7 +69,6 @@ const PostContainer = ({
   };
   return (
     <PostPresenter
-      id={id}
       user={user}
       files={files}
       likeCount={likeCountS}
