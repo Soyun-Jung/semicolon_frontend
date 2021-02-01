@@ -3,7 +3,6 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { HeartFull, CommentFull } from "./Icons";
 import { Link } from "react-router-dom";
-// import Popup from 'reactjs-popup';
 
 const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);

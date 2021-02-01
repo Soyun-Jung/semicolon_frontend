@@ -5,6 +5,7 @@ import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { Link } from "react-router-dom";
 import { HeartFull, HeartEmpty, Comment as CommentIcon} from "../Icons";
+import "./post.css";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -129,7 +130,7 @@ const Textarea = styled(TextareaAutosize)`
 const Comments = styled.ul`
   height:340px;
   margin-top:10px;
-  
+  overscroll-behavior-y: auto;
 `;
 
 const Comment = styled.li`
@@ -221,7 +222,7 @@ export default ({
          <Timestamp>{createdAt}</Timestamp>
      
          <Textarea
-        placeholder={"Add a comment..."}
+        placeholder={"댓글 작성 ... "}
         value={newComment.value}
         onChange={newComment.onChange}
           onKeyPress={onKeyUp} />

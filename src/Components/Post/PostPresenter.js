@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { HeartFull, HeartEmpty, Comment as CommentIcon} from "../Icons";
 import Popup from 'reactjs-popup';
 import DetailPost from "../DetailPost/index";
-import "../../Styles/Post.css";
+//import "../../Styles/post.css";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -156,7 +156,6 @@ export default ({
             <File key={file.id} src={file.url} showing={index === currentItem} />
           ))}
       </Files>
-      {/* <Caption>{caption}</Caption>  */}
       <Meta>
         <Buttons>
           <Button onClick={toggleLike}>
@@ -172,14 +171,6 @@ export default ({
         {PopupPost(id,user,files,likeCount,caption,avatar,isLiked,comments,createdAt)}
         {comments && (
           <Comments>
-            {/* {comments.map(comment => (
-              <Comment key={comment.id}>
-                <Link to={`/${comment.user.username}`}>
-                  <FatText text={comment.user.username} />
-                  </Link>
-                {comment.text}
-              </Comment>
-            ))} */}
             {selfComments.map(comment => (
               <Comment key={comment.id}>
                  <Link to={`/${comment.user.username}`}>
@@ -192,7 +183,7 @@ export default ({
         )}
         <Timestamp>{createdAt}</Timestamp>
         <Textarea
-          placeholder={"Add a comment..."}
+          placeholder={"댓글 작성 ... "}
           value={newComment.value}
           onChange={newComment.onChange}
           onKeyPress={onKeyUp} />

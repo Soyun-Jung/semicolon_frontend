@@ -9,7 +9,9 @@ import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
 import { Link } from "react-router-dom";
 import Popup from 'reactjs-popup'; 
-import "../../Styles/PopUp.css";
+import "./popup.css";
+
+
 
 const Users = styled.ul`
   margin-top:10px;
@@ -118,19 +120,19 @@ export default ({ loading, data, logOut }) => {
     } else if (!loading && data && data.seeUser) {
         const {
             seeUser: {
-                id,
-            avatar,
-                username,
-                fullName,
-            isFollowing,
-            followers,
-                following,
-                isSelf,
-                bio,
-                followingCount,
-                followersCount,
-                postsCount,
-                posts
+              id,
+              avatar,
+              username,
+              fullName,
+              isFollowing,
+              followers,
+              following,
+              isSelf,
+              bio,
+              followingCount,
+              followersCount,
+              postsCount,
+              posts
             }
         } = data;
         return (
@@ -147,33 +149,32 @@ export default ({ loading, data, logOut }) => {
                             <Username>{username}</Username>{" "}
 
                         </UsernameRow>
-                        <Counts>
-                            <Count>
-                                <FatText text={String(postsCount)} /> posts
+            <Counts>
+              <Count>
+                <FatText text={String(postsCount)} /> posts
               </Count>
-                            <Count>
-                    <FatText text={String(followersCount)} /> {FollowerPopUp(followers)}
+              <Count>
+                <FatText text={String(followersCount)} /> {FollowerPopUp(followers)}
               </Count>
-                            <Count>
-                                <FatText text={String(followingCount)} /> {FollowingPopUp(following)}
+              <Count>
+                <FatText text={String(followingCount)} /> {FollowingPopUp(following)}
               </Count>
 
-                        </Counts>
-                        <FullName text={fullName} />
-                        <Bio>{bio}</Bio>
-                {isSelf ? <Button onClick={logOut} text="Log Out"/> : <FollowButton isFollowing={isFollowing} id={id} />}
-                    </HeaderColumn>
-                </Header>
-                <Posts>
-                    {posts &&
-                posts.map(post => (
+            </Counts>
+              <FullName text={fullName} />
+              <Bio>{bio}</Bio>
+            {isSelf ? <Button onClick={logOut} text="Log Out"/> : <FollowButton isFollowing={isFollowing} id={id} />}
+              </HeaderColumn>
+              </Header>
+            <Posts>
+              {posts && posts.map(post => (
                   <SquarePost
                     key={post.id}
                     postid={post.id}
-                                likeCount={post.likeCount}
-                                commentCount={post.commentCount}
-                                file={post.files[0]}
-                            />
+                    likeCount={post.likeCount}
+                    commentCount={post.commentCount}
+                    file={post.files[0]}
+                  />
                     
                         ))}
                 </Posts>
@@ -189,6 +190,7 @@ const FollowerPopUp = (followers) => {
   return (
     <div>
       <Popup
+        className={"fpopup"}
         ref={ref}
         trigger={
           <Count>

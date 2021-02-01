@@ -4,6 +4,7 @@ import { Helmet } from "rl-react-helmet";
 import Loader from "../../Components/Loader";
 import Avatar from "../../Components/Avatar";
 import DetailPost from "../../Components/DetailPost";
+//import "../../Styles/post.css";
 
 
 const Wrapper = styled.div`

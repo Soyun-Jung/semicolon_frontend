@@ -92,7 +92,8 @@ export default withRouter(({ history }) => {
             <Compass />
           </HeaderLink>
           <HeaderLink to="/notifications">
-            <HeartEmpty />
+            {/* <Ionicons name="notifications-outline" size={24} color="black" /> */}
+             <HeartEmpty />
           </HeaderLink>
           {!data ? (<HeaderLink to="/#">
               <User />

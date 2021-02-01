@@ -60,21 +60,21 @@ export default ({
     <Form>
       {action === "logIn" && (
         <form onSubmit={onSubmit}>
-          <Input placeholder={"Email"} {...email} type="email" />
-          <Button text={"Log in"} />
+          <Input placeholder={"당신의 이메일은?"} {...email} type="email" />
+          <Button text={"로그인"} />
         </form>
       )}{ action === 'signUp' && (
         <form onSubmit={onSubmit}>
-          <Input placeholder={"First name"} {...firstName} />
-          <Input placeholder={"Last name"} {...lastName} />
-          <Input placeholder={"Email"} {...email} type="email" />
-          <Input placeholder={"Username"} {...username} />
-          <Button text={"Sign up"} />
+          <Input placeholder={"당신의 이름은?"} {...firstName} />
+          <Input placeholder={"당신의 성은?"} {...lastName} />
+          <Input placeholder={"당신의 이메일은?"} {...email} type="email" />
+          <Input placeholder={"당신의 닉네임은?"} {...username} />
+          <Button text={"회원가입"} />
         </form>
       )}
       {action === 'confirm' && <form onSubmit={onSubmit}>
         <Input placeholder="전송된 값을 입력해주세요!" required {...secret} />
-        <Button text={'Confirm'} />
+        <Button text={'확인'} />
         </form>
         }
     </Form>

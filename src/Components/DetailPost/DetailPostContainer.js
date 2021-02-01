@@ -63,7 +63,7 @@ const PostContainer = ({
         setSelfComments([...selfComments, addComment]);
         comment.setValue("");
       } catch {
-        toast.error("Can't send comment 😔");
+        toast.error("댓글을 작성할 수 없어요 😥");
       }
     }
   };
