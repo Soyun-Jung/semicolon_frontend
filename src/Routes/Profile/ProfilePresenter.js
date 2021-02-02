@@ -9,7 +9,7 @@ import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
 import { Link } from "react-router-dom";
 import Popup from 'reactjs-popup'; 
-import "./popup.css";
+import "../../Styles/popup.css";
 
 
 
@@ -25,11 +25,6 @@ const User = styled.li`
   display : flex;
   border-bottom: ${props => props.theme.lightGreyColor} 1px solid;
 `;
-
-const Caption = styled.div`
-  margin : 10px 0px
-`;
-
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -51,9 +46,7 @@ width : 60px;
 align-items: right; 
 text-align:right;
 margin-left:auto;
-
  `;
-
 
 const UsernameRow = styled.div`
   display: flex;
@@ -94,10 +87,9 @@ const FullNameF = styled.span`
   font-size: 12px;
   margin: 10px 0px;
   padding-bottom: 10px;
-  
   width: 90px;
-    overflow: hidden;
-    height: 13px
+  overflow: hidden;
+  height: 13px
 `;
 
 const UserDetail = styled.div`
@@ -167,16 +159,19 @@ export default ({ loading, data, logOut }) => {
               </HeaderColumn>
               </Header>
             <Posts>
-              {posts && posts.map(post => (
-                  <SquarePost
+              {posts && posts.map(post => {
+                if(post.state === "1") {
+                  return <SquarePost
                     key={post.id}
                     postid={post.id}
                     likeCount={post.likeCount}
                     commentCount={post.commentCount}
                     file={post.files[0]}
                   />
+                }
+                  
                     
-                        ))}
+                        })}
                 </Posts>
             </Wrapper>
         );
@@ -225,6 +220,7 @@ const FollowingPopUp = (following) => {
   return (
     <div>
       <Popup
+        className={"fpopup"}
         ref={ref}
         trigger={
           <Count>

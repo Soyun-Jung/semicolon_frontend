@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { HeartFull, HeartEmpty, Comment as CommentIcon} from "../Icons";
 import Popup from 'reactjs-popup';
 import DetailPost from "../DetailPost/index";
-//import "../../Styles/post.css";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};

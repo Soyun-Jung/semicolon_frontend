@@ -5,7 +5,6 @@ import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { Link } from "react-router-dom";
 import { HeartFull, HeartEmpty, Comment as CommentIcon} from "../Icons";
-import "./post.css";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -125,12 +124,11 @@ const Textarea = styled(TextareaAutosize)`
   font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `;
 
-
-
 const Comments = styled.ul`
   height:340px;
   margin-top:10px;
-  overscroll-behavior-y: auto;
+  overflow-y: auto;
+ }
 `;
 
 const Comment = styled.li`
@@ -187,7 +185,7 @@ export default ({
         <Caption><FatText text={username} /> {caption}</Caption>
 
       {comments && (
-        <Comments>
+        <Comments className={"commentsBox"}>
             {comments.map(comment => (
               <Comment key={comment.id}>
                 <Link to={`/${comment.user.username}`}>

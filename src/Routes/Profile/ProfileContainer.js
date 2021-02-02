@@ -32,6 +32,7 @@ const GET_USER = gql`
       followersCount
       postsCount
       posts {
+        state
         id
         files {
           url
