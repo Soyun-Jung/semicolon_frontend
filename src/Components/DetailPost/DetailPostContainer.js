@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./DetailPostPresenter";
 import { useMutation } from "react-apollo-hooks";
-import { TOGGLE_LIKE, ADD_COMMENT } from "./DetailPostQueries";
+import { TOGGLE_LIKE, ADD_COMMENT, DELETE_COMMENT  } from "./DetailPostQueries";
 import { toast } from "react-toastify";
+import { FEED_QUERY } from "../../Routes/Feed";
 
 const PostContainer = ({
   id,
@@ -21,14 +22,18 @@ const PostContainer = ({
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
-  const comment = useInput("");
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id }
   });
-  const [selfComments, setSelfComments] = useState([]);
+
+  const comment = useInput("");
+  const [selfComments, setSelfComments] = useState([...comments]);
+  
   const [addCommentMutation] = useMutation(ADD_COMMENT, {
-    variables: { postId: id, text: comment.value }
+    variables: { postId: id, text: comment.value }, refetchQueries: [{query:FEED_QUERY}]
   });
+
+  // const [removeCommentMutation] = useMutation(DELETE_COMMENT);
   const slide = () => {
     const totalFiles = files.length;
     if (currentItem === totalFiles - 1) {
@@ -63,19 +68,22 @@ const PostContainer = ({
         setSelfComments([...selfComments, addComment]);
         comment.setValue("");
       } catch {
-        toast.error("댓글을 작성할 수 없어요 😥");
+        toast.error("Can't send comment 😔");
       }
+      
     }
   };
+ 
   return (
     <PostPresenter
+      id={id}
       user={user}
       files={files}
       likeCount={likeCountS}
       location={location}
       caption={caption}
       isLiked={isLikedS}
-      comments={comments}
+      comments={selfComments}
       createdAt={createdAt}
       newComment={comment}
       setIsLiked={setIsLiked}
@@ -84,7 +92,10 @@ const PostContainer = ({
       toggleLike={toggleLike}
       onKeyUp={onKeyUp}
       avatar={avatar}
-      selfComments={selfComments}
+      // delComment={delComment}
+      setSelfComments={setSelfComments }
+    
+      
     />
   );
 };
@@ -106,6 +117,7 @@ PostContainer.propTypes = {
   isLiked: PropTypes.bool.isRequired,
   comments: PropTypes.arrayOf(
     PropTypes.shape({
+      isCommented : PropTypes.bool.isRequired,
       id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       user: PropTypes.shape({

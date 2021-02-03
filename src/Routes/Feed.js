@@ -6,7 +6,7 @@ import Loader from "../Components/Loader";
 import Post from "../Components/Post";
 import { Helmet } from "rl-react-helmet";
 
-const FEED_QUERY = gql`
+export const FEED_QUERY = gql`
   {
     seeFeed {
       state
@@ -25,6 +25,7 @@ const FEED_QUERY = gql`
       likeCount
       isLiked
       comments {
+        isCommented
         id
         text
         user {
@@ -46,7 +47,6 @@ const Wrapper = styled.div`
 
 export default () => {
     const { data, loading } = useQuery(FEED_QUERY);
-    console.log(data)
     return (
         <Wrapper>
             {loading && <Loader />}
@@ -55,7 +55,8 @@ export default () => {
               if (post.state === "1") {
                 return <Post key={post.id}
               id={post.id}
-              user={post.user}
+                  user={post.user}
+                  location={post.location}
               files={post.files}
               likeCount={post.likeCount}
               caption={post.caption}

@@ -5,7 +5,7 @@ import Input from "./Input";
 import useInput from "../Hooks/useInput";
 import { Compass, HeartEmpty, User, Logo } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
-import { ME, GET_WEATHER, GET_COVID } from "../SharedQueries";
+import { ME, GET_TODAYINFO } from "../SharedQueries";
 import EnventInfoContainer from "../Components/EventInfo";
 
 const Header = styled.header`
@@ -72,19 +72,14 @@ export default withRouter(({ history }) => {
     history.push(`/search?term=${search.value}`);
   };
   
-  const { data:weatherData } = useQuery(GET_WEATHER, {
-        variables: {
-            latitude: 37.4111,
-            longitude: 126.7111
+ const { data:todayData } = useQuery(GET_TODAYINFO, {
+      variables: {
+          location: "incheon",
+          latitude: 37.4111,
+          longitude: 126.7111
         }
-  });
-
-  const { data: covidData } = useQuery(GET_COVID, {
-    variables: {
-      location: "incheon"
-    }
-  });
-
+ });
+  
   return (
     <Header>
       <HeaderWrapper>
@@ -92,7 +87,7 @@ export default withRouter(({ history }) => {
           <Link to="/" style={{marginRight:30}}>
             <Logo />
           </Link>
-           {weatherData && covidData && <EnventInfoContainer location={covidData.covid19.countryName} data={covidData.covid19.newCase} temp={weatherData.weather.temp} weather={weatherData.weather.weather} />}
+            {todayData && <EnventInfoContainer location={todayData.todayInfo.countryName} data={todayData.todayInfo.newCase} temp={todayData.todayInfo.temp} weather={todayData.todayInfo.weather} />}
         </HeaderColumn>
         <HeaderColumn>
           <form onSubmit={onSearchSubmit}>

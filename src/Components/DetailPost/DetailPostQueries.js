@@ -6,6 +6,12 @@ export const TOGGLE_LIKE = gql`
   }
 `;
 
+export const COMMENT_LIKE = gql`
+  mutation commentLikes($commentId: String!) {
+    commentLikes(commentId: $commentId)
+  }
+`
+
 export const ADD_COMMENT = gql`
   mutation addComment($postId: String!, $text: String!) {
     addComment(postId: $postId, text: $text) {
@@ -15,5 +21,11 @@ export const ADD_COMMENT = gql`
         username
       }
     }
+  }
+`;
+
+export const DELETE_COMMENT = gql`
+  mutation deleteComment($id: String!) {
+    deleteComment(id: $id) 
   }
 `;

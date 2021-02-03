@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { Link } from "react-router-dom";
-import { HeartFull, HeartEmpty, Comment as CommentIcon} from "../Icons";
+import { StarFull, StarEmpty, Comment as CommentIcon } from "../Icons";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import Theme from "../../Styles/Theme";
 import Popup from 'reactjs-popup';
 import DetailPost from "../DetailPost/index";
+import "../../Styles/PopUp.css";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -85,16 +88,6 @@ const Timestamp = styled.span`
   border-bottom: ${props => props.theme.lightGreyColor} 1px solid;
 `;
 
-const CommentCount = styled.span`
-  font-weight: 400;
-  opacity: 0.6;
-  display: block;
-  font-size: 12px;
-  margin: 5px 0px;
-  padding-bottom: 4px;
-  cursor: pointer;
-`;
-
 const Textarea = styled(TextareaAutosize)`
   border: none;
   width: 100%;
@@ -119,6 +112,16 @@ const Comment = styled.li`
 
 const Caption = styled.div`
   margin : 10px 0px
+`;
+
+const CommentCount = styled.span`
+  font-weight: 400;
+  opacity: 0.6;
+  display: block;
+  font-size: 12px;
+  margin: 5px 0px;
+  padding-bottom: 4px;
+  cursor: pointer;
 `;
 
 export default ({
@@ -158,7 +161,7 @@ export default ({
       <Meta>
         <Buttons>
           <Button onClick={toggleLike}>
-            {isLiked ? <HeartFull /> : <HeartEmpty />}
+          {isLiked ? <FaStar size={26} color={Theme.starColor} /> : <FaRegStar size={26} />}
           </Button>
           <Button>
           
@@ -172,7 +175,8 @@ export default ({
           <Comments>
             {selfComments.map(comment => (
               <Comment key={comment.id}>
-                 <Link to={`/${comment.user.username}`}>
+                <Link to={`/${comment.user.username}`}>
+                  
                   <FatText text={comment.user.username} />
                   </Link>
                 {comment.text}
@@ -182,7 +186,7 @@ export default ({
         )}
         <Timestamp>{createdAt}</Timestamp>
         <Textarea
-          placeholder={"댓글 작성 ... "}
+          placeholder={"Add a comment..."}
           value={newComment.value}
           onChange={newComment.onChange}
           onKeyPress={onKeyUp} />
