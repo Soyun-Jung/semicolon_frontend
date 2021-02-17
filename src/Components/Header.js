@@ -86,7 +86,7 @@ export default withRouter(({ history }) => {
   const search = useInput("");
   const { data } = useQuery(ME);
   const { data : ndata } = useQuery(GET_NOTIFICATION);
-   console.log(ndata);
+
 
   const onSearchSubmit = e => {
     e.preventDefault();
@@ -194,8 +194,8 @@ const messageHandler = (id,following) => {
 
 
 const UserNotification = ({ ndata }) => {
-    const [data, setData] = useState([]);
-    console.log(ndata);
+  const [data, setData] = useState([]);
+  
   useEffect(() => { 
     
         const Notis = ndata.getNotificate.map((noti,index) => {
