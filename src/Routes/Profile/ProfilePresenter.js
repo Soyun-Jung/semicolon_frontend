@@ -111,7 +111,7 @@ justify-content: center;
 text-align: center;
 `;
 export default ({ loading, data, logOut }) => {
-  console.log(data)
+  (data)
   if (loading === true) {
     return (
       <Wrapper>

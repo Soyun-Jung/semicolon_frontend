@@ -25,7 +25,7 @@ export default () => {
   }
 
   const responseFacebook = async (response) => {
-    
+   
     email.setValue(response.email);
     firstName.setValue(response.first_name);
     lastName.setValue(response.last_name);
@@ -130,7 +130,7 @@ export default () => {
       if (email.value !== "") {
         try {
           const { data: { requestSecret } } = await requestSecretMutation();
-         
+          
           if (!requestSecret) {
             toast.error("다시 시도 해주세요/ 이메일이 중복되었습니다")
           } else {
@@ -167,7 +167,7 @@ export default () => {
       if (secret.value !== "") {
         try {
           const { data: { confirmSecret } } = await confirmSecretMutation();
-          
+         
           if (confirmSecret !== "" && confirmSecret !== undefined) {
             setAction('signUp');
           } else {
@@ -185,7 +185,7 @@ export default () => {
           
           if (pwCheckemail) {
             const { data: { findrequestSecret } } = await findrequestSecretMutation();
-            (findrequestSecret)
+            
             if (findrequestSecret) {
               toast.success('비밀번호를 입력해주세요!')
               setAction('ConfirmSc');
