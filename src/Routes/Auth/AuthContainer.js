@@ -25,7 +25,7 @@ export default () => {
   }
 
   const responseFacebook = async (response) => {
-   
+    console.log(response.email)
     email.setValue(response.email);
     firstName.setValue(response.first_name);
     lastName.setValue(response.last_name);
@@ -96,7 +96,7 @@ export default () => {
       if (email.value !== "" || emailRegex) {
         try {
           const { data: { checkemail } } = await checkemailQuery();
-          
+          console.log(checkemail)
           if (!checkemail) {
             toast.error("Woops!, 등록된 정보가 없어요! 회원가입으로 안내해 드릴게요!");
             setTimeout(() => setAction("signUp1"), 3000);
@@ -130,7 +130,7 @@ export default () => {
       if (email.value !== "") {
         try {
           const { data: { requestSecret } } = await requestSecretMutation();
-          
+          console.log(requestSecret);
           if (!requestSecret) {
             toast.error("다시 시도 해주세요/ 이메일이 중복되었습니다")
           } else {
@@ -167,7 +167,7 @@ export default () => {
       if (secret.value !== "") {
         try {
           const { data: { confirmSecret } } = await confirmSecretMutation();
-         
+          console.log("토큰은 :" + confirmSecret);
           if (confirmSecret !== "" && confirmSecret !== undefined) {
             setAction('signUp');
           } else {
@@ -182,10 +182,10 @@ export default () => {
       if (email.value !== "") {
         try {
           const { data: { pwCheckemail } } = await checkemailpwQuery();
-          
+          console.log(pwCheckemail)
           if (pwCheckemail) {
             const { data: { findrequestSecret } } = await findrequestSecretMutation();
-            
+            console.log(findrequestSecret)
             if (findrequestSecret) {
               toast.success('비밀번호를 입력해주세요!')
               setAction('ConfirmSc');
