@@ -209,7 +209,7 @@ const TagsInput = props => {
       <ul id="tags">
         {tag.map((tag, index) => (
           <li key={index} className="tag">
-            <a className='tag-title' href={`http://localhost:3000/#/search?term=${tag.tag}`}>;{tag.tag}</a>
+            <a className='tag-title' href={`https://teamsemi.netlify.app/#/search?term=${tag.tag}`}>;{tag.tag}</a>
           </li>
         ))}
       </ul>
